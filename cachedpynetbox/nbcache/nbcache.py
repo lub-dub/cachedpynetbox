@@ -281,7 +281,7 @@ class SyncedNetbox(object):
                 while nxid < 4:
                     head += 1
                     try:
-                        cset = self._netbox.extras.object_changes.get(head)
+                        cset = self._netbox.core.object_changes.get(head)
                         if not cset:
                             nxid += 1
                             continue
@@ -298,7 +298,7 @@ class SyncedNetbox(object):
                 logger.debug("cset updated to %r" % csid)
             else:
                 logger.debug("cset initializing from scratch")
-                csets = self._netbox.extras.object_changes.all()
+                csets = self._netbox.core.object_changes.all()
                 csets = sorted(csets, key=lambda x: x.id)
                 csid = None
                 for cset in csets:
@@ -309,7 +309,7 @@ class SyncedNetbox(object):
             return csid
 
         elif path == "changes":
-            return dict(self._netbox.extras.object_changes.get(int(oid)))
+            return dict(self._netbox.core.object_changes.get(int(oid)))
 
         path = path.split(".")
         p = self
