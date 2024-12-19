@@ -144,4 +144,4 @@ class pynetbox:
         self.dev_by_type("")
         self._snb.dcim.interfaces.getindex("type.label", "Link Aggregation Group (LAG)")
         self._snb.dcim.interfaces.getindex("lag", Any)
-        self._snb.extras.content_types.all()
+        self._snb.extras.object_types.all()
