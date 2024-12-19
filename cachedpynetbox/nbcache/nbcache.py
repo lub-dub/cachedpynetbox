@@ -87,7 +87,7 @@ class SyncedNetbox(object):
                         else:
                             change_data = change["postchange_data"]
                         ct_dict = self._snb._cache[
-                            "extras.content_types:%d"
+                                "extras.object_types:%d"
                             % (change_data["termination_type"])
                         ]
                         termination_id_name = (
