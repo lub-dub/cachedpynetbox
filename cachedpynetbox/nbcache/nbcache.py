@@ -298,8 +298,8 @@ class SyncedNetbox(object):
                 logger.debug("cset updated to %r" % csid)
             else:
                 logger.debug("cset initializing from scratch")
-                last_30 = datetime.datetime.now() - datetime.timedelta(minutes=30)
-                csets = self._netbox.core.object_changes.filter(time_after=last_30)
+                last_30 = datetime.datetime.utcnow() - datetime.timedelta(minutes=30)
+                csets = self._netbox.core.object_changes.filter(time_after=last_30))
                 csets = sorted(csets, key=lambda x: x.id)
                 csid = None
                 for cset in csets:
