@@ -299,7 +299,7 @@ class SyncedNetbox(object):
             else:
                 logger.debug("cset initializing from scratch")
                 last_30 = datetime.datetime.utcnow() - datetime.timedelta(minutes=30)
-                csets = self._netbox.core.object_changes.filter(time_after=last_30))
+                csets = self._netbox.core.object_changes.filter(time_after=last_30)
                 csets = sorted(csets, key=lambda x: x.id)
                 csid = None
                 for cset in csets:
@@ -319,7 +319,8 @@ class SyncedNetbox(object):
         return p.refresh(oid)
 
     def changes_lastid(self):
-        return int(self._cache.get_expiry("changes:last", expiry=15.0))
+        last_changes = self._cache.get_expiry("changes:last", expiry=15.0)
+        return int(last_changes) if last_changes else 0
 
     def changes_since(self, lastid):
         head = self.changes_lastid()
